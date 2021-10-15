@@ -1,0 +1,2 @@
+//send request
+GET https://api.themoviedb.org/3/movie/55?api_key=722c77446fd044276b5b3d1837ab774e
