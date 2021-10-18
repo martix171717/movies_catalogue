@@ -53,3 +53,11 @@ def get_movies_list(list_type):
     except requests.exceptions.HTTPError:
         return get_movies_list(list_type="popular")
     return response.json()
+
+def search(search_query):
+    endpoint = f"https://api.themoviedb.org/3/search/movie/?query={search_query}"
+    headers = {
+        "Authorization": f"Bearer {API_TOKEN}"
+    }
+    response = requests.get(endpoint, headers=headers)
+    return response.json()["results"]
