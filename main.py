@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import tmdb_client
 import random
+import datetime
 
 app = Flask(__name__)
 
@@ -34,6 +35,12 @@ def search():
     else:
         movies=[]
     return render_template("search.html", movies=movies, search_query=search_query)
+
+@app.route('/today')
+def today():
+    movies=tmdb_client.get_airing_today()
+    today = datetime.date.today()
+    return render_template("today.html", movies=movies, today=today)
 
 if __name__ == '__main__':
     app.run(debug=True)
