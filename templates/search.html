@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <h1 class="mt-5">Welcome to my movie library</h1>
+    <p class="lead">Search results for your query: {{ search_query }}</p>
+  </div>
+  {% for movie in movies %}
+  <div class="col-lg-3 col-md-6 mb-4">
+    <div class="card h-100">
+      <img class="card-img-top" src="{{ tmdb_image_url(movie.poster_path, "w185") }}" alt="">
+        <div class="card-body">
+          <h4 class="card-title">{{ movie.title }}</h4>
+          <p class="card-text">{{movie.overview}}</p>
+          <h5 class="card-title">Rating: </h5>
+          <p class="card-text">{{movie.vote_average}}</p>
+        </div>
+        <div class="card-footer text-center">
+          <a href="{{ url_for('movie_details', movie_id=movie.id) }}" class="btn btn-primary">Show more</a>
+        </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
