@@ -37,16 +37,7 @@ def get_movie_images(movie_id):
     return call_tmdb_api(f"movie/{movie_id}/images")
 
 def get_movies_list(list_type):
-    endpoint = f"https://api.themoviedb.org/3/movie/{list_type}"
-    headers = {
-        "Authorization": f"Bearer {API_TOKEN}"
-    }
-    response = requests.get(endpoint, headers=headers)
-    try:
-        response.raise_for_status()
-    except requests.exceptions.HTTPError:
-        return get_movies_list(list_type="popular")
-    return response.json()
+    return call_tmdb_api(f"movie/{list_type}")
 
 def search(search_query):
     endpoint = f"https://api.themoviedb.org/3/search/movie/?query={search_query}"
