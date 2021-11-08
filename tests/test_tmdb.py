@@ -40,17 +40,17 @@ def test_get_single_movie(monkeypatch):
     assert single_movie == mock_single_movie
 
 def test_get_single_movie_cast(monkeypatch):
-    mock_movie_cast = {'Id': 1, 'cast': [1, 2]}
+    mock_movie_cast = {"id":1, "cast":[{1,2}]}
     call_tmdb_api_mock = Mock()
     call_tmdb_api_mock.return_value = mock_movie_cast
     monkeypatch.setattr("tmdb_client.call_tmdb_api", call_tmdb_api_mock)
     movie_cast = tmdb_client.get_single_movie_cast(movie_id=1)
-    return movie_cast == mock_movie_cast
+    assert movie_cast == mock_movie_cast["cast"]
 
 def test_get_movie_images(monkeypatch):
-    mock_movie_images = {'Id': 1, 'images': [1, 2]}
+    mock_movie_images = ['Image 1', 'Image 2']
     call_tmdb_api_mock = Mock()
     call_tmdb_api_mock.return_value = mock_movie_images
     monkeypatch.setattr("tmdb_client.call_tmdb_api", call_tmdb_api_mock)
     movie_images = tmdb_client.get_movie_images(movie_id=1)
-    return movie_images == mock_movie_images
+    assert movie_images == mock_movie_images
